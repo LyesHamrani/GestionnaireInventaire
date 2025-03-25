@@ -1,0 +1,259 @@
+﻿<UserControl x:Class="GestionnaireInventaire.Views.ProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GestionnaireInventaire.Views"
+             xmlns:viewModels="clr-namespace:GestionnaireInventaire.ViewsModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModels:ProductViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Liste des produits -->
+        <Border CornerRadius="10" 
+                BorderThickness="2"
+                Margin="15,15,10,15">
+            <!-- Ajout d'une marge à droite -->
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource lightColor}" Offset="0"/>
+                    <GradientStop Color="{StaticResource violetColor1}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource violetColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Titre de la liste -->
+                <TextBlock Text="Liste des produits" 
+                           FontSize="18" 
+                           FontWeight="Medium"
+                           Margin="15,10"
+                           Foreground="White"
+                           Grid.Row="0"/>
+
+                <!-- ListBox des produits -->
+                <ListBox x:Name="lstProduits"
+                         Grid.Row="1"
+                         Margin="10" 
+                         ItemsSource="{Binding Produits}"
+                         SelectedItem="{Binding ProduitSelectionne}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Foreground="White">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="5" 
+                                    Padding="10" 
+                                    CornerRadius="5" 
+                                    Background="#3A3357"
+                                    BorderThickness="1"
+                                    BorderBrush="#6A5B9A">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="{Binding Nom}" 
+                                                  FontWeight="Bold"
+                                                  Foreground="White"/>
+                                        <TextBlock Text="{Binding Description}" 
+                                                  TextWrapping="Wrap"
+                                                  Foreground="#CCC8DC"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" 
+                                                Orientation="Vertical" 
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding IdCategorieNavigation.Nom}" 
+                                                  Foreground="#AD9EE8"
+                                                  HorizontalAlignment="Right"/>
+                                        <TextBlock Text="{Binding Quantity, StringFormat='Quantité: {0}'}" 
+                                                  Foreground="#CCC8DC"
+                                                  HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+        <!-- Formulaire de détails -->
+        <Border Grid.Column="1" 
+                CornerRadius="10" 
+                BorderThickness="2"
+                Margin="10,15,15,15">
+            <!-- Ajout d'une marge à gauche -->
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource lightColor}" Offset="0"/>
+                    <GradientStop Color="{StaticResource violetColor1}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource violetColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Titre du formulaire -->
+                <TextBlock Text="Détails du produit" 
+                           FontSize="18" 
+                           FontWeight="Medium"
+                           Margin="0,0,0,15"
+                           Foreground="White"
+                           Grid.Row="0"/>
+
+                <!-- Champs de formulaire -->
+                <StackPanel Grid.Row="1" Margin="0,0,0,0">
+                    <!-- Nom -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="Nom" 
+                                   Margin="0,0,0,5"
+                                   Foreground="White"/>
+                        <TextBox Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="{StaticResource darkVioletBrush1}"
+                                 Foreground="White"
+                                 BorderThickness="1"
+                                 BorderBrush="{StaticResource darkVioletBrush2}"
+                                 Padding="5,3"/>
+                    </StackPanel>
+
+                    <!-- Description -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="Description" 
+                                   Margin="0,0,0,5"
+                                   Foreground="White"/>
+                        <TextBox Text="{Binding Description}" 
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 Height="60"
+                                 Background="{StaticResource darkVioletBrush1}"
+                                 Foreground="White"
+                                 BorderThickness="1"
+                                 BorderBrush="{StaticResource darkVioletBrush2}"
+                                 Padding="5,3"/>
+                    </StackPanel>
+
+                    <!-- Catégorie -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="Catégorie" 
+                                   Margin="0,0,0,5"
+                                   Foreground="White"/>
+                        <ComboBox ItemsSource="{Binding Categories}"
+                                  SelectedItem="{Binding CategorieSelectionnee}"
+                                  DisplayMemberPath="Nom"
+                                  Background="{StaticResource darkVioletBrush1}"
+                                  Foreground="White"
+                                  BorderThickness="1"
+                                  BorderBrush="{StaticResource darkVioletBrush2}"/>
+                    </StackPanel>
+
+                    <!-- Quantité -->
+                    <StackPanel>
+                        <TextBlock Text="Quantité" 
+                                   Margin="0,0,0,5"
+                                   Foreground="White"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Bouton Moins -->
+                            <Button Grid.Column="0"
+                                    Command="{Binding DiminuerQuantiteCommand}"
+                                    Content="-"
+                                    Width="37" 
+                                    Height="30"
+                                    Background="{StaticResource darkVioletBrush1}"
+                                    Foreground="White"
+                                    BorderThickness="1"
+                                    BorderBrush="{StaticResource darkVioletBrush2}"/>
+
+                            <!-- Champ de quantité -->
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding Quantite, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="5,0,5,0"
+                                     TextAlignment="Center"
+                                     Background="{StaticResource darkVioletBrush1}"
+                                     Foreground="White"
+                                     BorderThickness="1"
+                                     BorderBrush="{StaticResource darkVioletBrush2}"/>
+
+                            <!-- Bouton Plus -->
+                            <Button Grid.Column="2"
+                                    Command="{Binding AugmenterQuantiteCommand}"
+                                    Content="+" 
+                                    Width="37"
+                                    Height="30"
+                                    Background="{StaticResource darkVioletBrush1}"
+                                    Foreground="White"
+                                    BorderThickness="1"
+                                    BorderBrush="{StaticResource darkVioletBrush2}" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Boutons d'action -->
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Center"
+                            Margin="0,20,0,0">
+                    <!-- Bouton Nouveau -->
+                    <Button Command="{Binding NouveauCommand}" 
+                            Content="Nouveau"
+                            Margin="5"
+                            Width="85"
+                            Background="{StaticResource newBrush}"
+                            Foreground="White"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource newHoverBrush}"/>
+
+                    <!-- Bouton Enregistrer -->
+                    <Button Command="{Binding EnregistrerCommand}" 
+                            Content="Enregistrer"
+                            Margin="5"
+                            Width="85"
+                            Background="{StaticResource successBrush}"
+                            Foreground="White"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource successHoverBrush}"/>
+
+                    <!-- Bouton Supprimer -->
+                    <Button Command="{Binding SupprimerCommand}" 
+                            Content="Supprimer"
+                            Margin="5"
+                            Width="85"
+                            Background="{StaticResource dangerBrush}"
+                            Foreground="White"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource dangerHoverBrush}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

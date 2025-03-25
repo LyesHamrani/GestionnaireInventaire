@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="GestionnaireInventaire.Views.CategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:GestionnaireInventaire.Views"
+             xmlns:viewModels="clr-namespace:GestionnaireInventaire.ViewsModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModels:CategoryViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- En-tête explicatif -->
+        <Border Grid.Row="0" 
+                Background="#30FFFFFF" 
+                CornerRadius="10" 
+                Margin="0,0,0,20" 
+                Padding="20">
+            <TextBlock Text="Liste des catégories" 
+                       Foreground="{StaticResource lightBrush}"
+                       FontSize="24" 
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Conteneur principal -->
+        <Border Grid.Row="1"
+                CornerRadius="10" 
+                Background="#20FFFFFF"
+                BorderThickness="1">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#44FFFFFF" Offset="0"/>
+                    <GradientStop Color="#88FFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- En-tête de la liste -->
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Nom de la catégorie"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource violetBrush2}"
+                               FontSize="16"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="Nombre de produits"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource violetBrush2}"
+                               FontSize="16"/>
+                </Grid>
+
+                <!-- Liste des catégories -->
+                <ListView Grid.Row="1"
+                          ItemsSource="{Binding Categories}"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="Margin" Value="0,5"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border x:Name="Border"
+                                                CornerRadius="5"
+                                                Background="#40FFFFFF"
+                                                Padding="10">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#60FFFFFF"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#80FFFFFF"/>
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource violetBrush1}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Nom de la catégorie -->
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <fa:IconImage Icon="Tags"
+                                                Width="24"
+                                                Height="24"
+                                                Foreground="{StaticResource violetBrush1}"
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Nom}"
+                                              FontSize="16"
+                                              Foreground="{StaticResource lightBrush}"
+                                              VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- Nombre de produits -->
+                                <Border Grid.Column="1"
+                                        Background="{StaticResource violetBrush3}"
+                                        CornerRadius="15"
+                                        Padding="10,3"
+                                        Width="40"
+                                        Height="26">
+                                    <TextBlock Text="{Binding NombreProduits}"
+                                              FontSize="14"
+                                              FontWeight="Bold"
+                                              Foreground="White"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

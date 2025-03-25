@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Couleurs principales - thème violet -->
+    <Color x:Key="violetColor1">#7047A9</Color>
+    <!-- Violet principal -->
+    <Color x:Key="violetColor2">#B168D4</Color>
+    <!-- Violet clair/accentuation -->
+    <Color x:Key="violetColor3">#8A2BE2</Color>
+    <!-- Bleu-violet -->
+    <Color x:Key="violetColor4">#4B2D83</Color>
+    <!-- Violet foncé -->
+    <Color x:Key="lightColor">#E0D5F0</Color>
+    <!-- Lavande très clair -->
+    <Color x:Key="redColor">#EF4566</Color>
+    <!-- Rouge pour alertes -->
+    <Color x:Key="bgColor">#1E1A2E</Color>
+    <!-- Couleur de fond de l'application -->
+    
+
+    <!-- Couleurs additionnelles de la page produits -->
+    <Color x:Key="successColor">#4CAF50</Color>
+    <!-- Vert pour bouton enregistrer -->
+    <Color x:Key="successHoverColor">#5DBF61</Color>
+    <!-- Vert hover -->
+    <Color x:Key="dangerColor">#F44336</Color>
+    <!-- Rouge pour bouton supprimer -->
+    <Color x:Key="dangerHoverColor">#FF5349</Color>
+    <!-- Rouge hover -->
+    <Color x:Key="newColor">#7047A9</Color>
+    <!-- Violet pour bouton nouveau -->
+    <Color x:Key="newHoverColor">#8858BA</Color>
+    <!-- Violet hover -->
+
+    <!-- Brosses de couleurs principales -->
+    <SolidColorBrush x:Key="violetBrush1" Color="{StaticResource violetColor1}"/>
+    <SolidColorBrush x:Key="violetBrush2" Color="{StaticResource violetColor2}"/>
+    <SolidColorBrush x:Key="violetBrush3" Color="{StaticResource violetColor3}"/>
+    <SolidColorBrush x:Key="violetBrush4" Color="{StaticResource violetColor4}"/>
+    <SolidColorBrush x:Key="lightBrush" Color="{StaticResource lightColor}"/>
+    <SolidColorBrush x:Key="redBrush" Color="{StaticResource redColor}"/>
+    <SolidColorBrush x:Key="darkVioletBrush1" Color="#3A3357"/>
+    <SolidColorBrush x:Key="darkVioletBrush2" Color="#6A5B9A"/>
+
+    <!-- Brosses de couleurs additionnelles -->
+    <SolidColorBrush x:Key="successBrush" Color="{StaticResource successColor}"/>
+    <SolidColorBrush x:Key="successHoverBrush" Color="{StaticResource successHoverColor}"/>
+    <SolidColorBrush x:Key="dangerBrush" Color="{StaticResource dangerColor}"/>
+    <SolidColorBrush x:Key="dangerHoverBrush" Color="{StaticResource dangerHoverColor}"/>
+    <SolidColorBrush x:Key="newBrush" Color="{StaticResource newColor}"/>
+    <SolidColorBrush x:Key="newHoverBrush" Color="{StaticResource newHoverColor}"/>
+</ResourceDictionary>
